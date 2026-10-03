@@ -1,0 +1,27 @@
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.log
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+coverage/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Environment and secrets
+.env
+.env.*
+application-local.properties
+application-local.yml
+
+# Operating system
+.DS_Store
+Thumbs.db
