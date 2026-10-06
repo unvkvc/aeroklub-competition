@@ -6,12 +6,11 @@
             http://www.liquibase.org/xml/ns/dbchangelog
             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include
-            file="001-create-competition-table.xml"
-            relativeToChangelogFile="true"/>
-
-    <include
-            file="002-fix-public-results-type.xml"
-            relativeToChangelogFile="true"/>
+    <changeSet id="002-fix-public-results-type" author="una">
+        <modifyDataType
+                tableName="competition"
+                columnName="public_results_enabled"
+                newDataType="BIT(1)"/>
+    </changeSet>
 
 </databaseChangeLog>
