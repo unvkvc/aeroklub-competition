@@ -38,7 +38,7 @@ public class Competition {
     private Integer baseRoundCount = 8;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false, length = 30) 
     private CompetitionStatus status = CompetitionStatus.DRAFT;
 
     @Column(name = "public_results_enabled", nullable = false)
