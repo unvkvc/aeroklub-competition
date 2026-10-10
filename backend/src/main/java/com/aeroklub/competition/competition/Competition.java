@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "competition")
-public class Competition {
+public class Competition {                    // ONE ENTRY IN THE "COMPETITION" TABLE
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class Competition {
     @Column(name = "team_size", nullable = false)
     private Integer teamSize;
 
-    @Column(name = "base_round_count", nullable = false)
+    @Column(name = "base_round_count", nullable = false)       //the number of regular rounds before the semifinal and final
     private Integer baseRoundCount = 8;
 
     @Enumerated(EnumType.STRING)
