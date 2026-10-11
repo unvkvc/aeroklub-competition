@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="005-create-competition-team-tables" author="una">
+
+        <createTable tableName="competition_team">
+
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints
+                        primaryKey="true"
+                        nullable="false"/>
+            </column>
+
+            <column name="competition_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="team_number" type="INT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column
+                    name="created_at"
+                    type="DATETIME"
+                    defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="fk_team_competition"
+                baseTableName="competition_team"
+                baseColumnNames="competition_id"
+                referencedTableName="competition"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+
+        <addUniqueConstraint
+                constraintName="uk_competition_team_number"
+                tableName="competition_team"
+                columnNames="competition_id, team_number"/>
+
+        <createTable tableName="competition_team_member">
+
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints
+                        primaryKey="true"
+                        nullable="false"/>
+            </column>
+
+            <column name="team_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="participant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="member_position" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column
+                    name="created_at"
+                    type="DATETIME"
+                    defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="fk_team_member_team"
+                baseTableName="competition_team_member"
+                baseColumnNames="team_id"
+                referencedTableName="competition_team"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                constraintName="fk_team_member_participant"
+                baseTableName="competition_team_member"
+                baseColumnNames="participant_id"
+                referencedTableName="competition_participant"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+
+        <addUniqueConstraint
+                constraintName="uk_team_member_position"
+                tableName="competition_team_member"
+                columnNames="team_id, member_position"/>
+
+        <addUniqueConstraint
+                constraintName="uk_team_participant"
+                tableName="competition_team_member"
+                columnNames="participant_id"/>
+
+    </changeSet>
+
+</databaseChangeLog>
